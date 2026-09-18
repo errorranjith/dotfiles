@@ -1,0 +1,11 @@
+#!/bin/bash
+
+volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -1 | tr -d '%')
+mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+
+if [ "$mute" = "yes" ]; then
+    echo "VOL MUTE"
+else
+    [ "$volume" -gt 100 ] && volume=100
+    echo "VOL ${volume}%"
+fi

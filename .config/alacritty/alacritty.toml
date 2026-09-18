@@ -1,0 +1,46 @@
+[window]
+padding = { x = 12, y = 12 }
+decorations = "full"
+dynamic_title = true
+
+[font]
+size = 10.0
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#ffffff"
+
+[colors.normal]
+black   = "#000000"
+red     = "#777777"
+green   = "#aaaaaa"
+yellow  = "#cccccc"
+blue    = "#555555"
+magenta = "#888888"
+cyan    = "#dddddd"
+white   = "#ffffff"
+
+[colors.bright]
+black   = "#222222"
+red     = "#777777"
+green   = "#aaaaaa"
+yellow  = "#cccccc"
+blue    = "#555555"
+magenta = "#888888"
+cyan    = "#dddddd"
+white   = "#ffffff"
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }

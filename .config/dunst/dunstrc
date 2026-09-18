@@ -1,0 +1,29 @@
+[global]
+    font = "JetBrains Mono 9"
+    origin = "top-right"
+    offset = "16x16"
+    width = 300
+    height = 100
+    frame_width = 1
+    frame_color = "#ffffff"
+    separator_color = "#222222"
+    padding = 10
+    horizontal_padding = 12
+    transparency = 0
+    corner_radius = 0
+
+[urgency_low]
+    background = "#000000"
+    foreground = "#888888"
+    timeout = 3
+
+[urgency_normal]
+    background = "#000000"
+    foreground = "#ffffff"
+    timeout = 5
+
+[urgency_critical]
+    background = "#000000"
+    foreground = "#ffffff"
+    frame_color = "#ffffff"
+    timeout = 0

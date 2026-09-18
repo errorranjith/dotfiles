@@ -1,0 +1,166 @@
+# ==============================================================================
+# Base Settings & Font
+# ==============================================================================
+font pango:JetBrains Mono 9
+floating_modifier Mod4
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders none
+
+# Clean, tight gap spacing
+gaps inner 4
+gaps outer 0
+
+# ==============================================================================
+# Autostart
+# ==============================================================================
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --color 000000 --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id copyq
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
+exec --no-startup-id dunst
+exec --no-startup-id ~/.config/i3/scripts/battery-alert.sh
+exec --no-startup-id xautolock -time 10 -locker "i3lock --color 000000"
+exec --no-startup-id alacritty --class dropdown_terminal
+exec --no-startup-id xautolock -time 10 -locker "~/.config/i3/scripts/lock.sh"
+exec_always --no-startup-id ~/.config/i3/scripts/touchpad.sh
+exec_always --no-startup-id xsetroot -solid "#000000"
+exec_always --no-startup-id feh --bg-fill ~/Downloads/"sticker wallpaper 4k _ wallpaper31.jpeg"
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# ==============================================================================
+# Hardware Keys (Volume, Brightness)
+# ==============================================================================
+# Hardware Keys (Volume with OSD)
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh volume_up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh volume_down
+bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh volume_mute
+
+# Hardware Keys (Brightness with OSD)
+bindsym XF86MonBrightnessUp   exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh brightness_up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh brightness_down
+
+# ==============================================================================
+# Core Applications & Utilities
+# ==============================================================================
+bindsym Mod4+Return exec alacritty
+bindsym Mod4+q      kill
+bindsym Mod4+d      exec --no-startup-id rofi -show drun
+bindsym Print       exec --no-startup-id flameshot gui
+bindsym Mod4+Shift+x exec --no-startup-id ~/.config/i3/scripts/lock.sh
+bindsym Mod4+Shift+Return exec alacritty -e ranger
+
+# ==============================================================================
+# Navigation (Vim Standard: h, j, k, l)
+# ==============================================================================
+bindsym Mod4+h focus left
+bindsym Mod4+j focus down
+bindsym Mod4+k focus up
+bindsym Mod4+l focus right
+
+bindsym Mod4+Shift+h move left
+bindsym Mod4+Shift+j move down
+bindsym Mod4+Shift+k move up
+bindsym Mod4+Shift+l move right
+
+# Arrow keys fallback
+bindsym Mod4+Left  focus left
+bindsym Mod4+Down  focus down
+bindsym Mod4+Up    focus up
+bindsym Mod4+Right focus right
+
+bindsym Mod4+Shift+Left  move left
+bindsym Mod4+Shift+Down  move down
+bindsym Mod4+Shift+Up    move up
+bindsym Mod4+Shift+Right move right
+
+# ==============================================================================
+# Layout Management
+# ==============================================================================
+bindsym Mod4+b split h
+bindsym Mod4+v split v
+bindsym Mod4+f fullscreen toggle
+
+bindsym Mod4+s layout stacking
+bindsym Mod4+w layout tabbed
+bindsym Mod4+e layout toggle split
+
+bindsym Mod4+Shift+space floating toggle
+bindsym Mod4+space       focus mode_toggle
+
+bindsym Mod4+Shift+minus move scratchpad
+bindsym Mod4+minus       scratchpad show
+
+# ------------------------------------------------------------------------------
+# Dedicated Dropdown Scratchpad Terminal
+# ------------------------------------------------------------------------------
+# Launch or show/hide the scratchpad
+bindsym Mod4+u exec --no-startup-id ~/.config/i3/scripts/dropdown.sh
+
+# Automatic window rules for the dropdown instance
+
+for_window [class="dropdown_terminal"] floating enable, border pixel 2, resize set 900 520, move position center, move scratchpad
+# ==============================================================================
+# Workspaces
+# ==============================================================================
+bindsym Mod4+1 workspace number 1
+bindsym Mod4+2 workspace number 2
+bindsym Mod4+3 workspace number 3
+bindsym Mod4+4 workspace number 4
+bindsym Mod4+5 workspace number 5
+bindsym Mod4+6 workspace number 6
+bindsym Mod4+7 workspace number 7
+bindsym Mod4+8 workspace number 8
+bindsym Mod4+9 workspace number 9
+bindsym Mod4+0 workspace number 10
+
+bindsym Mod4+Shift+1 move container to workspace number 1
+bindsym Mod4+Shift+2 move container to workspace number 2
+bindsym Mod4+Shift+3 move container to workspace number 3
+bindsym Mod4+Shift+4 move container to workspace number 4
+bindsym Mod4+Shift+5 move container to workspace number 5
+bindsym Mod4+Shift+6 move container to workspace number 6
+bindsym Mod4+Shift+7 move container to workspace number 7
+bindsym Mod4+Shift+8 move container to workspace number 8
+bindsym Mod4+Shift+9 move container to workspace number 9
+bindsym Mod4+Shift+0 move container to workspace number 10
+
+# Session control
+bindsym Mod4+Shift+c reload
+bindsym Mod4+Shift+r restart
+bindsym Mod4+Shift+e exec --no-startup-id ~/.config/rofi/scripts/powermenu.sh
+
+# ==============================================================================
+# Monochrome Color Palette (True Black & Stark White)
+# ==============================================================================
+# class                 border  bground text    indicator child_border
+client.focused          #ffffff #000000 #ffffff #ffffff   #ffffff
+client.focused_inactive #444444 #000000 #888888 #444444   #444444
+client.unfocused        #444444 #000000 #555555 #444444   #444444
+client.urgent           #ffffff #000000 #ffffff #ffffff   #ffffff
+client.placeholder      #000000 #000000 #ffffff #000000   #000000
+
+# ==============================================================================
+# Automatic Floating Rules
+# ==============================================================================
+# Utility dialogs & system tools
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+# Audio, network, and hardware dialogs
+for_window [class="Pavucontrol"] floating enable, resize set 650 450, move position center
+for_window [class="Nm-connection-editor"] floating enable, resize set 600 400, move position center
+for_window [class="Blueman-manager"] floating enable, resize set 600 400, move position center
+
+# Media, calculators, and image viewers
+for_window [class="feh"] floating enable
+for_window [class="(?i)gnome-calculator"] floating enable
+for_window [class="flameshot"] floating enable
+
+# Center floating windows by default
+for_window [floating] move position center
