@@ -47,9 +47,12 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/notify-o
 bindsym Mod4+Return exec alacritty
 bindsym Mod4+q      kill
 bindsym Mod4+d      exec --no-startup-id rofi -show drun
-bindsym Print       exec --no-startup-id flameshot gui
+#bindsym Print       exec --no-startup-id flameshot gui
 bindsym Mod4+Shift+x exec --no-startup-id ~/.config/i3/scripts/lock.sh
 bindsym Mod4+Shift+Return exec alacritty -e ranger
+# Screenshots (PrintScreen for full, Shift+PrintScreen for select area)
+bindsym Print       exec --no-startup-id ~/.config/i3/scripts/screenshot.sh full
+bindsym Shift+Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh area
 
 # ==============================================================================
 # Navigation (Vim Standard: h, j, k, l)
