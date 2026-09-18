@@ -141,3 +141,7 @@ parse_git_branch() {
 export PS1="\[\e[1;37m\]\w\[\e[0;37m\]\$(parse_git_branch) \[\e[1;37m\]❯\[\e[0m\] "
 fastfetch
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# System-wide dark mode enforcement
+export GTK_THEME="Adwaita:dark"
+export QT_STYLE_OVERRIDE="Adwaita-Dark"
