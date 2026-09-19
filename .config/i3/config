@@ -3,13 +3,13 @@
 # ==============================================================================
 font pango:JetBrains Mono 9
 floating_modifier Mod4
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 1
+default_floating_border pixel 1
 hide_edge_borders none
 
 # Clean, tight gap spacing
 gaps inner 4
-gaps outer 0
+gaps outer 8
 
 # ==============================================================================
 # Autostart
@@ -28,6 +28,7 @@ exec_always --no-startup-id ~/.config/i3/scripts/touchpad.sh
 exec_always --no-startup-id xsetroot -solid "#000000"
 exec_always --no-startup-id feh --bg-fill ~/Downloads/"sticker wallpaper 4k _ wallpaper31.jpeg"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/i3/scripts/display.sh
 
 # ==============================================================================
 # Hardware Keys (Volume, Brightness)
@@ -44,15 +45,16 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/notify-o
 # ==============================================================================
 # Core Applications & Utilities
 # ==============================================================================
-bindsym Mod4+Return exec alacritty
+bindsym Mod4+Return exec kitty
 bindsym Mod4+q      kill
 bindsym Mod4+d      exec --no-startup-id rofi -show drun
 #bindsym Print       exec --no-startup-id flameshot gui
 bindsym Mod4+Shift+x exec --no-startup-id ~/.config/i3/scripts/lock.sh
-bindsym Mod4+Shift+Return exec alacritty -e ranger
+bindsym Mod4+Shift+Return exec kitty -e ranger
 # Screenshots (PrintScreen for full, Shift+PrintScreen for select area)
 bindsym Print       exec --no-startup-id ~/.config/i3/scripts/screenshot.sh full
 bindsym Shift+Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh area
+bindsym Mod4+Shift+p exec --no-startup-id arandr
 
 # ==============================================================================
 # Navigation (Vim Standard: h, j, k, l)
@@ -102,8 +104,9 @@ bindsym Mod4+minus       scratchpad show
 bindsym Mod4+u exec --no-startup-id ~/.config/i3/scripts/dropdown.sh
 
 # Automatic window rules for the dropdown instance
+# Dedicated Dropdown Scratchpad for Kitty
+for_window [instance="dropdown_terminal"] floating enable, border pixel 2, resize set 900 520, move position center, move scratchpad
 
-for_window [class="dropdown_terminal"] floating enable, border pixel 2, resize set 900 520, move position center, move scratchpad
 # ==============================================================================
 # Workspaces
 # ==============================================================================
