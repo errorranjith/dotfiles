@@ -29,6 +29,7 @@ exec_always --no-startup-id xsetroot -solid "#000000"
 exec_always --no-startup-id feh --bg-fill ~/Downloads/"sticker wallpaper 4k _ wallpaper31.jpeg"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3/scripts/display.sh
+exec_always --no-startup-id xsetroot -cursor_name left_ptr
 
 # ==============================================================================
 # Hardware Keys (Volume, Brightness)
