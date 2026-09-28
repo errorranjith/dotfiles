@@ -1,14 +1,14 @@
+
 # ==============================================================================
 # Base Settings & Font
 # ==============================================================================
-font pango:JetBrains Mono 9
+font pango:Jetsbrain Mono 8
 floating_modifier Mod4
-default_border pixel 1
-default_floating_border pixel 1
-hide_edge_borders none
+default_border pixel 2
+default_floating_border pixel 2
 
 # Clean, tight gap spacing
-gaps inner 4
+gaps inner 8
 gaps outer 8
 
 # ==============================================================================
@@ -26,10 +26,12 @@ exec --no-startup-id alacritty --class dropdown_terminal
 exec --no-startup-id xautolock -time 10 -locker "~/.config/i3/scripts/lock.sh"
 exec_always --no-startup-id ~/.config/i3/scripts/touchpad.sh
 exec_always --no-startup-id xsetroot -solid "#000000"
-exec_always --no-startup-id feh --bg-fill ~/Downloads/"sticker wallpaper 4k _ wallpaper31.jpeg"
+exec_always --no-startup-id feh --bg-center ~/Downloads/"❪𝙋𝙞𝙣𝙣𝙚𝙙 𝘽𝙮 𝙕𝙖𝙛𝙞𝙞'❫⸙ ️️️️️️️️️️️️️️️️️️️️️️️️.jpeg"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3/scripts/display.sh
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
+exec_always --no-startup-id /home/ranjith/.local/bin/autotiling
+exec_always --no-startup-id copyq
 
 # ==============================================================================
 # Hardware Keys (Volume, Brightness)
@@ -49,13 +51,26 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/notify-o
 bindsym Mod4+Return exec kitty
 bindsym Mod4+q      kill
 bindsym Mod4+d      exec --no-startup-id rofi -show drun
-#bindsym Print       exec --no-startup-id flameshot gui
+# Replace Rofi with FZF Kitty Launcher
+#bindsym Mod4+d exec kitty --name fzf_launcher -e ~/.config/i3/scripts/fzf-launcher.sh
+bindsym Print       exec --no-startup-id flameshot gui
 bindsym Mod4+Shift+x exec --no-startup-id ~/.config/i3/scripts/lock.sh
-bindsym Mod4+Shift+Return exec kitty -e ranger
+bindsym Mod4+Shift+Return exec kitty -e yazi
 # Screenshots (PrintScreen for full, Shift+PrintScreen for select area)
-bindsym Print       exec --no-startup-id ~/.config/i3/scripts/screenshot.sh full
+#bindsym Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh full
 bindsym Shift+Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh area
 bindsym Mod4+Shift+p exec --no-startup-id arandr
+
+# --- Clipboard & Connectivity Keybindings ---
+
+# Mod4 + c : Toggle CopyQ Clipboard History HUD
+bindsym Mod4+c exec copyq toggle
+
+# Mod4 + Shift + w : Open Wi-Fi Menu
+bindsym Mod4+Shift+w exec ~/.config/i3/scripts/rofi-wifi.sh
+
+# Mod4 + Shift + b : Open Bluetooth Menu
+bindsym Mod4+Shift+b exec ~/.config/i3/scripts/rofi-bluetooth.sh
 
 # ==============================================================================
 # Navigation (Vim Standard: h, j, k, l)
@@ -97,6 +112,27 @@ bindsym Mod4+space       focus mode_toggle
 
 bindsym Mod4+Shift+minus move scratchpad
 bindsym Mod4+minus       scratchpad show
+
+mode "resize" {
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink width 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # Ditto, with arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # Back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod4+r mode "default"
+}
+
+bindsym Mod4+r mode "resize"
+
 
 # ------------------------------------------------------------------------------
 # Dedicated Dropdown Scratchpad Terminal
@@ -142,11 +178,22 @@ bindsym Mod4+Shift+e exec --no-startup-id ~/.config/rofi/scripts/powermenu.sh
 # Monochrome Color Palette (True Black & Stark White)
 # ==============================================================================
 # class                 border  bground text    indicator child_border
-client.focused          #ffffff #000000 #ffffff #ffffff   #ffffff
-client.focused_inactive #444444 #000000 #888888 #444444   #444444
-client.unfocused        #444444 #000000 #555555 #444444   #444444
-client.urgent           #ffffff #000000 #ffffff #ffffff   #ffffff
-client.placeholder      #000000 #000000 #ffffff #000000   #000000
+#client.focused          #ffffff #000000 #ffffff #ffffff   #ffffff
+#client.focused_inactive #444444 #000000 #888888 #444444   #444444
+#client.unfocused        #444444 #000000 #555555 #444444   #444444
+#client.urgent           #ffffff #000000 #ffffff #ffffff   #ffffff
+#client.placeholder      #000000 #000000 #ffffff #000000   #000000
+
+
+# Color Tokens: Focused White / Inactive Dim
+# class                 border    backgr    text      indicator child_border
+client.focused          #ffffff   #000000   #ffffff   #ffffff   #ffffff
+client.focused_inactive #262626   #000000   #737373   #262626   #262626
+client.unfocused        #262626   #000000   #737373   #262626   #262626
+client.urgent           #ffffff   #000000   #ffffff   #ffffff   #ffffff
+client.placeholder      #000000   #000000   #ffffff   #000000   #000000
+client.background       #000000
+
 
 # ==============================================================================
 # Automatic Floating Rules
@@ -171,3 +218,17 @@ for_window [class="flameshot"] floating enable
 
 # Center floating windows by default
 for_window [floating] move position center
+
+# Bottles management GUI and Wine configuration dialogues
+for_window [class="com.usebottles.bottles"] floating enable, border pixel 2, resize set 1050 680, move position center
+for_window [instance="wine"] floating enable
+
+# FZF Scratchpad Launcher
+for_window [instance="fzf_launcher"] floating enable, border pixel 2, resize set 520 280, move position center
+
+# CopyQ Floating HUD Rule
+for_window [class="copyq"] floating enable, border pixel 2, resize set 600 450, move position center
+
+# Force 2px border on Kitty windows explicitly
+for_window [class="kitty"] border pixel 2
+for_window [class=".*"] border pixel 2
