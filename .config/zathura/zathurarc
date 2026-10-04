@@ -1,0 +1,40 @@
+# --- Appearance & Window ---
+set font "JetBrains Mono 10"
+set window-title-home-tilde true
+set statusbar-basename true
+set selection-clipboard clipboard
+
+# Smooth scrolling
+set scroll-step 40
+
+# --- Monochrome Color Palette ---
+set default-bg                  "#000000"
+set default-fg                  "#ffffff"
+
+set statusbar-bg                "#121212"
+set statusbar-fg                "#ffffff"
+
+set inputbar-bg                 "#000000"
+set inputbar-fg                 "#ffffff"
+
+set notification-bg             "#121212"
+set notification-fg             "#ffffff"
+set notification-error-bg       "#262626"
+set notification-error-fg       "#ffffff"
+set notification-warning-bg     "#262626"
+set notification-warning-fg     "#ffffff"
+
+set highlight-color             "#737373"
+set highlight-active-color      "#ffffff"
+
+set completion-bg               "#121212"
+set completion-fg               "#737373"
+set completion-highlight-bg     "#ffffff"
+set completion-highlight-fg     "#000000"
+
+# --- Dark Mode / Page Recolor ---
+# Inverts white document pages to black with white text
+set recolor-lightcolor          "#000000"
+set recolor-darkcolor           "#ffffff"
+set recolor                     true
+set recolor-keephue             true
