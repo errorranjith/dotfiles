@@ -1,0 +1,72 @@
+[mgr]
+cwd = { fg = "#E6E6E6", bold = true }
+
+hovered = { fg = "#FFFFFF", bg = "#2A2A2A", bold = true }
+preview_hovered = { underline = true }
+
+find_keyword = { fg = "#0D0D0D", bg = "#E6E6E6", bold = true }
+find_position = { fg = "#E6E6E6", bg = "reset", bold = true }
+
+marker_copied = { fg = "#E6E6E6", bg = "#E6E6E6" }
+marker_cut = { fg = "#777777", bg = "#777777" }
+marker_marked = { fg = "#FFFFFF", bg = "#FFFFFF" }
+marker_selected = { fg = "#E6E6E6", bg = "#E6E6E6" }
+
+count_copied = { fg = "#0D0D0D", bg = "#E6E6E6" }
+count_cut = { fg = "#FFFFFF", bg = "#777777" }
+count_selected = { fg = "#FFFFFF", bg = "#2A2A2A" }
+
+border_symbol = "│"
+border_style = { fg = "#777777" }
+
+[tabs]
+active = { fg = "#FFFFFF", bg = "#2A2A2A", bold = true }
+inactive = { fg = "#777777", bg = "#0D0D0D" }
+
+[mode]
+normal_main = { fg = "#0D0D0D", bg = "#E6E6E6", bold = true }
+normal_alt = { fg = "#E6E6E6", bg = "#2A2A2A" }
+select_main = { fg = "#0D0D0D", bg = "#E6E6E6", bold = true }
+select_alt = { fg = "#E6E6E6", bg = "#2A2A2A" }
+unset_main = { fg = "#0D0D0D", bg = "#777777", bold = true }
+unset_alt = { fg = "#777777", bg = "#2A2A2A" }
+
+[status]
+overall = { fg = "#E6E6E6", bg = "#0D0D0D" }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+progress_label = { fg = "#E6E6E6", bold = true }
+progress_normal = { fg = "#777777", bg = "#0D0D0D" }
+progress_error = { fg = "#FFFFFF", bg = "#777777" }
+
+[input]
+border = { fg = "#777777" }
+title = {}
+value = { fg = "#E6E6E6" }
+selected = { reversed = true }
+
+[select]
+border = { fg = "#777777" }
+active = { fg = "#FFFFFF", bold = true }
+inactive = { fg = "#777777" }
+
+[tasks]
+border = { fg = "#777777" }
+title = {}
+hovered = { fg = "#FFFFFF", bg = "#2A2A2A", bold = true }
+
+[which]
+cols = 3
+mask = { bg = "#0D0D0D" }
+cand = { fg = "#E6E6E6" }
+rest = { fg = "#777777" }
+desc = { fg = "#E6E6E6" }
+separator = "  "
+separator_style = { fg = "#777777" }
+
+[help]
+on = { fg = "#E6E6E6" }
+exec = { fg = "#FFFFFF", bold = true }
+desc = { fg = "#777777" }
+hovered = { fg = "#FFFFFF", bg = "#2A2A2A", bold = true }
+footer = { fg = "#777777", bg = "#0D0D0D" }

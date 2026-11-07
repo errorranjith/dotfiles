@@ -1,0 +1,91 @@
+configuration {
+    font: "Ubuntu Regular 10";
+    show-icons: true;
+    icon-theme: "Tela circle black";
+    display-drun: "APPS";
+    display-run: "RUN";
+    display-window: "WINDOW";
+    drun-display-format: "{name}";
+}
+
+@theme "/dev/null"
+
+* {
+    bg: #000000;
+    bg-alt: #121212;
+    fg: #ffffff;
+    fg-dim: #737373;
+    border-col: #262626;
+
+    background-color: transparent;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    width: 480px;
+    background-color: @bg;
+    border: 2px solid;
+    border-color: @border-col;
+    border-radius: 10px;
+    padding: 14px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+    spacing: 10px;
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius: 6px;
+    padding: 8px 12px;
+    children: [ prompt, entry ];
+    spacing: 10px;
+}
+
+prompt {
+    text-color: @fg-dim;
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @fg-dim;
+    text-color: @fg;
+}
+
+listview {
+    lines: 7;
+    columns: 1;
+    fixed-height: false;
+    scrollbar: false;
+    spacing: 4px;
+}
+
+element {
+    padding: 8px 10px;
+    border-radius: 6px;
+    spacing: 10px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: #ffffff;
+    text-color: #000000;
+}
+
+element-icon {
+    size: 18px;
+}
+
+element-text {
+    text-color: inherit;
+    vertical-align: 0.5;
+}

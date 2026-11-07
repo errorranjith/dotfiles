@@ -1,47 +1,44 @@
-
 # ==============================================================================
 # Base Settings & Font
 # ==============================================================================
-font pango:Jetsbrain Mono 8
+font pango: Ubuntu Regular 10
 floating_modifier Mod4
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 1
+default_floating_border pixel 1
 
 # Clean, tight gap spacing
-gaps inner 8
+gaps inner 10
 gaps outer 8
 
 # ==============================================================================
-# Autostart
+# Autostart (Pruned for Minimum Resource Usage)
 # ==============================================================================
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --color 000000 --nofork
+# Single idle/screen lock daemon (replaces xautolock + duplicate xss-lock calls)
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/lock.sh
+
+# Network applet & Notifications
 exec --no-startup-id nm-applet
-exec --no-startup-id copyq
-exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id dunst
+
+# Lightweight Compositor & Custom Scripts
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id ~/.config/i3/scripts/battery-alert.sh
-exec --no-startup-id xautolock -time 10 -locker "i3lock --color 000000"
-exec --no-startup-id alacritty --class dropdown_terminal
-exec --no-startup-id xautolock -time 10 -locker "~/.config/i3/scripts/lock.sh"
 exec_always --no-startup-id ~/.config/i3/scripts/touchpad.sh
-exec_always --no-startup-id xsetroot -solid "#000000"
-exec_always --no-startup-id feh --bg-center ~/Downloads/"❪𝙋𝙞𝙣𝙣𝙚𝙙 𝘽𝙮 𝙕𝙖𝙛𝙞𝙞'❫⸙ ️️️️️️️️️️️️️️️️️️️️️️️️.jpeg"
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id ~/.config/i3/scripts/display.sh
+
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
-exec_always --no-startup-id /home/ranjith/.local/bin/autotiling
+
+# Status Bar & Window Utilities
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id autotiling
 exec_always --no-startup-id copyq
 
 # ==============================================================================
 # Hardware Keys (Volume, Brightness)
 # ==============================================================================
-# Hardware Keys (Volume with OSD)
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh volume_up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh volume_down
 bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh volume_mute
 
-# Hardware Keys (Brightness with OSD)
 bindsym XF86MonBrightnessUp   exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh brightness_up
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/notify-osd.sh brightness_down
 
@@ -51,26 +48,19 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/notify-o
 bindsym Mod4+Return exec kitty
 bindsym Mod4+q      kill
 bindsym Mod4+d      exec --no-startup-id rofi -show drun
-# Replace Rofi with FZF Kitty Launcher
-#bindsym Mod4+d exec kitty --name fzf_launcher -e ~/.config/i3/scripts/fzf-launcher.sh
-bindsym Print       exec --no-startup-id flameshot gui
-bindsym Mod4+Shift+x exec --no-startup-id ~/.config/i3/scripts/lock.sh
+bindsym Mod4+z      exec brave-browser
+
+bindsym Print            exec --no-startup-id flameshot gui
+bindsym Mod4+Shift+Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh area
+bindsym Mod4+Shift+x     exec --no-startup-id ~/.config/i3/scripts/lock.sh
 bindsym Mod4+Shift+Return exec kitty -e yazi
-# Screenshots (PrintScreen for full, Shift+PrintScreen for select area)
-#bindsym Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh full
-bindsym Shift+Print exec --no-startup-id ~/.config/i3/scripts/screenshot.sh area
-bindsym Mod4+Shift+p exec --no-startup-id arandr
+bindsym Mod4+Shift+p     exec --no-startup-id arandr
 
-# --- Clipboard & Connectivity Keybindings ---
-
-# Mod4 + c : Toggle CopyQ Clipboard History HUD
-bindsym Mod4+c exec copyq toggle
-
-# Mod4 + Shift + w : Open Wi-Fi Menu
+# Clipboard & Connectivity
+bindsym Mod4+c       exec copyq toggle
 bindsym Mod4+Shift+w exec ~/.config/i3/scripts/rofi-wifi.sh
-
-# Mod4 + Shift + b : Open Bluetooth Menu
 bindsym Mod4+Shift+b exec ~/.config/i3/scripts/rofi-bluetooth.sh
+bindsym Mod4+Shift+t exec --no-startup-id kitty --class "tty-clock-widget" -e tty-clock -s -c -C 7
 
 # ==============================================================================
 # Navigation (Vim Standard: h, j, k, l)
@@ -85,7 +75,7 @@ bindsym Mod4+Shift+j move down
 bindsym Mod4+Shift+k move up
 bindsym Mod4+Shift+l move right
 
-# Arrow keys fallback
+# Fallback arrow navigation
 bindsym Mod4+Left  focus left
 bindsym Mod4+Down  focus down
 bindsym Mod4+Up    focus up
@@ -114,34 +104,25 @@ bindsym Mod4+Shift+minus move scratchpad
 bindsym Mod4+minus       scratchpad show
 
 mode "resize" {
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink width 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym j resize shrink height 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink width 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # Ditto, with arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left  resize shrink width 10 px or 10 ppt
+    bindsym Down  resize grow height 10 px or 10 ppt
+    bindsym Up    resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # Back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym Mod4+r mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Mod4+r mode "default"
 }
 
 bindsym Mod4+r mode "resize"
 
-
-# ------------------------------------------------------------------------------
 # Dedicated Dropdown Scratchpad Terminal
-# ------------------------------------------------------------------------------
-# Launch or show/hide the scratchpad
 bindsym Mod4+u exec --no-startup-id ~/.config/i3/scripts/dropdown.sh
-
-# Automatic window rules for the dropdown instance
-# Dedicated Dropdown Scratchpad for Kitty
 for_window [instance="dropdown_terminal"] floating enable, border pixel 2, resize set 900 520, move position center, move scratchpad
 
 # ==============================================================================
@@ -177,15 +158,6 @@ bindsym Mod4+Shift+e exec --no-startup-id ~/.config/rofi/scripts/powermenu.sh
 # ==============================================================================
 # Monochrome Color Palette (True Black & Stark White)
 # ==============================================================================
-# class                 border  bground text    indicator child_border
-#client.focused          #ffffff #000000 #ffffff #ffffff   #ffffff
-#client.focused_inactive #444444 #000000 #888888 #444444   #444444
-#client.unfocused        #444444 #000000 #555555 #444444   #444444
-#client.urgent           #ffffff #000000 #ffffff #ffffff   #ffffff
-#client.placeholder      #000000 #000000 #ffffff #000000   #000000
-
-
-# Color Tokens: Focused White / Inactive Dim
 # class                 border    backgr    text      indicator child_border
 client.focused          #ffffff   #000000   #ffffff   #ffffff   #ffffff
 client.focused_inactive #262626   #000000   #737373   #262626   #262626
@@ -194,11 +166,9 @@ client.urgent           #ffffff   #000000   #ffffff   #ffffff   #ffffff
 client.placeholder      #000000   #000000   #ffffff   #000000   #000000
 client.background       #000000
 
-
 # ==============================================================================
 # Automatic Floating Rules
 # ==============================================================================
-# Utility dialogs & system tools
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -206,29 +176,31 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-# Audio, network, and hardware dialogs
+# Hardware dialogs
 for_window [class="Pavucontrol"] floating enable, resize set 650 450, move position center
 for_window [class="Nm-connection-editor"] floating enable, resize set 600 400, move position center
 for_window [class="Blueman-manager"] floating enable, resize set 600 400, move position center
 
-# Media, calculators, and image viewers
+# Tools & Media
 for_window [class="feh"] floating enable
 for_window [class="(?i)gnome-calculator"] floating enable
 for_window [class="flameshot"] floating enable
+for_window [class="(?i)^zathura$"] floating enable, resize set 960 700, move position center
+
+# Bottles and launchers
+#for_window [class="com.usebottles.bottles"] floating enable, border pixel 2, resize set 1050 680, move position center
+#for_window [instance="wine"] floating enable
+for_window [instance="fzf_launcher"] floating enable, border pixel 2, resize set 520 280, move position center
+for_window [class="copyq"] floating enable, border pixel 2, resize set 600 450, move position center
+for_window [instance="tty-clock-widget"] floating enable, resize set 600 450, move position center, border pixel 0
 
 # Center floating windows by default
 for_window [floating] move position center
 
-# Bottles management GUI and Wine configuration dialogues
-for_window [class="com.usebottles.bottles"] floating enable, border pixel 2, resize set 1050 680, move position center
-for_window [instance="wine"] floating enable
-
-# FZF Scratchpad Launcher
-for_window [instance="fzf_launcher"] floating enable, border pixel 2, resize set 520 280, move position center
-
-# CopyQ Floating HUD Rule
-for_window [class="copyq"] floating enable, border pixel 2, resize set 600 450, move position center
-
-# Force 2px border on Kitty windows explicitly
-for_window [class="kitty"] border pixel 2
+# Universal 2px border fallback
 for_window [class=".*"] border pixel 2
+
+# Force main SoapUI window to tile, but keep modal dialogs floating
+for_window [class="com-eviware-soapui-SoapUI"] floating disable
+for_window [class="com-eviware-soapui-SoapUI" window_type="dialog"] floating enable
+for_window [class="com-eviware-soapui-SoapUI" window_type="splash"] floating enable
